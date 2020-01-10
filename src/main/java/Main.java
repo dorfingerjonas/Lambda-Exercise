@@ -1,6 +1,7 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -8,15 +9,26 @@ public class Main {
         final String path = "pupils.csv";
 
         try {
-
-            List<Pupil> pupils = new ArrayList<>();
-
             Files.readAllLines(Paths.get(path)).stream()
                     .skip(1)
-                    .peek(System.out::println)
                     .map(line -> line.split(";"))
-                    .map(elements -> new Pupil(Integer.parseInt(elements[0]), elements[1], elements[2], elements[3], elements[4], elements[5]))
-                    .peek(pupils::add)
+                    .map(elements -> new Pupil(Integer.parseInt(elements[0]), elements[1], elements[2], elements[3], Integer.parseInt(elements[4]), elements[5]))
+                    .filter(pupil -> pupil.getPostcode() % 2 == 0)
+                    .forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println();
+        System.out.println();
+
+        try {
+            Files.readAllLines(Paths.get(path)).stream()
+                    .skip(1)
+                    .map(line -> line.split(";"))
+                    .map(elements -> new Pupil(Integer.parseInt(elements[0]), elements[1], elements[2], elements[3], Integer.parseInt(elements[4]), elements[5]))
+                    .filter(pupil -> pupil.getCity().equals("Linz"))
+                    .sorted(Comparator.comparing(Pupil::getDateOfBirth))
                     .forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
