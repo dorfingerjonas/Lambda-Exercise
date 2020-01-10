@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Pupil {
     private int id;
@@ -8,11 +9,13 @@ public class Pupil {
     private String postcode;
     private String city;
 
-    public Pupil(int id, String firstName, String lastName, LocalDate dateOfBirth, String postcode, String city) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    public Pupil(int id, String firstName, String lastName, String dateOfBirth, String postcode, String city) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
         this.postcode = postcode;
         this.city = city;
     }
@@ -43,6 +46,6 @@ public class Pupil {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " was born on " + dateOfBirth + " and lives in " + postcode + " " + city;
+        return firstName + " " + lastName + " was born on " + dateOfBirth + " and lives in " + postcode + " " + city + ".";
     }
 }
