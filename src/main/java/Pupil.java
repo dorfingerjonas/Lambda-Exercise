@@ -6,12 +6,12 @@ public class Pupil {
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
-    private String postcode;
+    private int postcode;
     private String city;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    public Pupil(int id, String firstName, String lastName, String dateOfBirth, String postcode, String city) {
+    public Pupil(int id, String firstName, String lastName, String dateOfBirth, int postcode, String city) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public class Pupil {
         return dateOfBirth;
     }
 
-    public String getPostcode() {
+    public int getPostcode() {
         return postcode;
     }
 
